@@ -1,0 +1,286 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #6366f1;
+    --primary-hover: #4f46e5;
+    --secondary-color: #06b6d4;
+    --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #311042 100%);
+    --card-bg: rgba(255, 255, 255, 0.96);
+    --text-dark: #0f172a;
+    --text-muted: #64748b;
+    --border-color: #e2e8f0;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    background: var(--bg-gradient);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 5rem 1rem 2rem 1rem; /* Added top padding to prevent content from hiding behind fixed header */
+    color: var(--text-dark);
+    position: relative;
+    overflow-x: hidden;
+    margin: 0;
+}
+
+/* Background Glowing Accents */
+body::before,
+body::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.5;
+    z-index: 0;
+}
+
+body::before {
+    width: 350px;
+    background: var(--primary-color);
+    top: -50px;
+    left: -50px;
+}
+
+body::after {
+    width: 300px;
+    background: var(--secondary-color);
+    bottom: -50px;
+    right: -50px;
+}
+
+/* Top Floating Bar Container (Houses Timer and Logout together on small screens) */
+#cont {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#timer {
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #38bdf8;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 8px 16px;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    letter-spacing: 0.5px;
+}
+
+/* Logout Button */
+#logout {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+#logout:hover {
+    background: rgba(239, 68, 68, 0.85);
+    border-color: rgba(239, 68, 68, 0.9);
+    box-shadow: 0 8px 20px rgba(239, 68, 68, 0.35);
+    transform: translateY(-2px);
+}
+
+/* Main Quiz Container */
+.container#container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 540px;
+    margin-top: 10px;
+}
+
+#display {
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 24px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(16px);
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+/* Question Headers */
+#qno {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--primary-color);
+    margin: 0 0 8px 0;
+}
+
+h1:has(#question), 
+#display > h1 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 1.75rem;
+    line-height: 1.4;
+}
+
+/* Option Containers (Cards) */
+#op1, #op2, #op3, #op4 {
+    position: relative;
+    margin-bottom: 12px;
+}
+
+/* Hide default radio inputs */
+#op1 input[type="radio"],
+#op2 input[type="radio"],
+#op3 input[type="radio"],
+#op4 input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+/* Style Option Labels */
+#op1 label,
+#op2 label,
+#op3 label,
+#op4 label {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 14px 18px 14px 48px;
+    background-color: #f8fafc;
+    border: 1.5px solid var(--border-color);
+    border-radius: 14px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #334155;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    user-select: none;
+}
+
+/* Custom Checkmark Indicator */
+#op1 label::before,
+#op2 label::before,
+#op3 label::before,
+#op4 label::before {
+    content: '';
+    position: absolute;
+    left: 16px;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #cbd5e1;
+    border-radius: 50%;
+    background-color: #ffffff;
+    transition: all 0.2s ease;
+}
+
+/* Hover States */
+#op1:hover label,
+#op2:hover label,
+#op3:hover label,
+#op4:hover label {
+    background-color: #ffffff;
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.08);
+}
+
+/* Active / Checked State */
+#op1 input[type="radio"]:checked + label,
+#op2 input[type="radio"]:checked + label,
+#op3 input[type="radio"]:checked + label,
+#op4 input[type="radio"]:checked + label {
+    background-color: #eef2ff;
+    border-color: var(--primary-color);
+    color: var(--primary-hover);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+#op1 input[type="radio"]:checked + label::before,
+#op2 input[type="radio"]:checked + label::before,
+#op3 input[type="radio"]:checked + label::before,
+#op4 input[type="radio"]:checked + label::before {
+    border-color: var(--primary-color);
+    background-color: var(--primary-color);
+    box-shadow: inset 0 0 0 3px #ffffff;
+}
+
+/* Next / Action Button */
+#nextButton {
+    margin-top: 1.25rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+    border: none;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 13px;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    width: 100%;
+}
+
+#nextButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 24px rgba(99, 102, 241, 0.4);
+    background: linear-gradient(135deg, var(--primary-hover), #4338ca);
+}
+
+#nextButton:active {
+    transform: translateY(0);
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 576px) {
+    #cont {
+        padding: 10px 12px;
+    }
+
+    #timer {
+        font-size: 0.85rem;
+        padding: 6px 12px;
+    }
+
+    #logout {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+        border-radius: 8px;
+    }
+
+    #display {
+        padding: 1.5rem 1.1rem;
+    }
+}
+/* Score Card Text Helpers */
+.text-success { color: #10b981 !important; }
+.text-danger { color: #ef4444 !important; }
+.text-warning { color: #f59e0b !important; }

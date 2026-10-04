@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Pulse - Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+
+    <!-- Responsive Top Bar (Timer & Logout) -->
+    <div id="cont">
+        <div id="timer">
+            <i class="fa-regular fa-clock me-1"></i> <span id="time-display">00:00</span>
+        </div>
+        <button id="logout">
+            <i class="fa-solid fa-right-from-bracket me-1"></i> Logout
+        </button>
+    </div>
+
+    <!-- Main Quiz Container -->
+    <div class="container" id="container">
+        <div class="row" id="display">
+
+            <h2 id="qno">Question 1</h2>
+            <h1><span id="question">SMIT Stand For</span></h1>
+
+            <!-- Option 1 -->
+            <div id="op1">
+                <input type="radio" name="quiz" value="SMIT" id="option1">
+                <label for="option1">SMIT</label>
+            </div>
+
+            <!-- Option 2 -->
+            <div id="op2">
+                <input type="radio" name="quiz" value="Saylani Mass IT Training" id="option2">
+                <label for="option2">Saylani Mass IT Training</label>
+            </div>
+
+            <!-- Option 3 -->
+            <div id="op3">
+                <input type="radio" name="quiz" value="Saylani Mass IT" id="option3">
+                <label for="option3">Saylani Mass IT</label>
+            </div>
+
+            <!-- Option 4 -->
+            <div id="op4">
+                <input type="radio" name="quiz" value="Saylani" id="option4">
+                <label for="option4">Saylani</label>
+            </div>
+
+            <!-- Next Button -->
+            <button id="nextButton">
+                Next Question <i class="fa-solid fa-arrow-right ms-2"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="supabase.js"></script>
+    <script src="quiz.js"></script>
+</body>
+</html>
