@@ -23,7 +23,7 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    padding: 5rem 1rem 2rem 1rem; /* Added top padding to prevent content from hiding behind fixed header */
+    padding: 5rem 1rem 2rem 1rem;
     color: var(--text-dark);
     position: relative;
     overflow-x: hidden;
@@ -55,7 +55,7 @@ body::after {
     right: -50px;
 }
 
-/* Top Floating Bar Container (Houses Timer and Logout together on small screens) */
+/* Top Floating Bar Container */
 #cont {
     position: fixed;
     top: 0;
@@ -164,8 +164,6 @@ h1:has(#question),
     top: 0;
     left: 0;
     z-index: 2;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
 }
 
 /* Style Option Labels */
@@ -261,28 +259,29 @@ h1:has(#question),
     transform: translateY(0);
 }
 
-/* Responsive adjustments for smaller screens */
+/* Responsive adjustments */
 @media (max-width: 576px) {
     #cont {
         padding: 10px 12px;
     }
-
     #timer {
         font-size: 0.85rem;
         padding: 6px 12px;
     }
-
     #logout {
         padding: 6px 12px;
         font-size: 0.8rem;
         border-radius: 8px;
     }
-
     #display {
         padding: 1.5rem 1.1rem;
     }
 }
-/* Score Card Text Helpers */
+
+/* Helper Classes for Results & Score Cards */
 .text-success { color: #10b981 !important; }
 .text-danger { color: #ef4444 !important; }
 .text-warning { color: #f59e0b !important; }
+.bg-light { background-color: #f8fafc !important; }
+.border { border: 1px solid var(--border-color) !important; }
+.rounded-4 { border-radius: 16px !important; }
