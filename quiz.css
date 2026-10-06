@@ -164,6 +164,8 @@ h1:has(#question),
     top: 0;
     left: 0;
     z-index: 2;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
 /* Style Option Labels */
